@@ -1,4 +1,5 @@
 import * as React from 'react';
+import teamsLogo from '@app/assets/bgimages/microsoft-teams.svg';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   Alert,
@@ -1126,8 +1127,8 @@ const RoleDeleted: React.FunctionComponent = () => {
                             toggleContent={
                               <Flex alignItems={{ default: 'alignItemsCenter' }} spaceItems={{ default: 'spaceItemsSm' }}>
                                 <img 
-                                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/2203px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png" 
-                                  alt="Microsoft Teams"
+                                  src={teamsLogo}
+                                  alt=""
                                   style={{ width: '24px', height: 'auto' }}
                                 />
                                 <span>Microsoft Teams</span>
@@ -2441,8 +2442,8 @@ const RoleDeleted: React.FunctionComponent = () => {
                                   <AngleRightIcon />
                                 </span>
                                 <img 
-                                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/2203px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png" 
-                                  alt="Microsoft Teams"
+                                  src={teamsLogo}
+                                  alt=""
                                   style={{ width: '24px', height: 'auto' }}
                                 />
                                 <span>Microsoft Teams</span>

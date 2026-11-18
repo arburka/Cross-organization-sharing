@@ -128,7 +128,7 @@ async function handleNotificationSetup(userMessage: string): Promise<ScenarioRes
     editPrompt:
       `Want me to:\n1. Configure a custom utilization threshold at **${threshold}%** for ${product} so you receive an early-warning notification\n2. Audit your existing notification settings in the Hybrid Cloud Console to ensure your team is opted-in to receive these alerts\n3. Both\n\nReply **1**, **2**, **3**, or **no**.`,
     citations: [
-      { title: 'Notification Settings', url: `${HCC_BASE}/settings/notifications` },
+      { title: 'Alert Manager Settings', url: `${HCC_BASE}/settings/alert-manager` },
     ],
     confidence: 'medium',
     skillLabel: 'Notification Setup',

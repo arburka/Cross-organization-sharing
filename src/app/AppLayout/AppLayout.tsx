@@ -2114,7 +2114,6 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
 
   const settingsNavPages = [
     '/settings/integrations',
-    '/settings/notifications',
     '/settings/alert-manager',
     '/settings/language',
     '/settings/learning-resources',
@@ -2194,8 +2193,8 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   // Settings bundle navigation
   const settingsNavItems = [
     { label: 'Integrations', path: '/settings/integrations', isActive: location.pathname === '/settings/integrations' },
-    { label: 'Alert Manager', path: '/settings/alert-manager', isActive: location.pathname === '/settings/alert-manager' },
-    { label: 'Notifications', path: '/settings/notifications', isActive: location.pathname === '/settings/notifications' },
+    { label: 'Alert Manager', path: '/settings/alert-manager', isActive: location.pathname === '/settings/alert-manager' || location.pathname.startsWith('/settings/alert-manager/events/') },
+    { label: 'Third-party notifiers', path: '/settings/third-party-notifiers', isActive: location.pathname === '/settings/third-party-notifiers' },
     {
       label: 'User Preferences',
       path: '/settings/user-preferences',

@@ -52,8 +52,8 @@ import { SubscriptionWorkspaces } from '@app/Subscriptions/SubscriptionWorkspace
 import { GeneralSettings } from '@app/Settings/General/GeneralSettings';
 import { ProfileSettings } from '@app/Settings/Profile/ProfileSettings';
 import { Integrations } from '@app/Settings/Integrations/Integrations';
-import { Notifications } from '@app/Settings/Notifications/Notifications';
 import { AlertManagerSettings } from '@app/Settings/AlertManager/AlertManager';
+import { ThirdPartyNotifiers } from '@app/Settings/ThirdPartyNotifiers/ThirdPartyNotifiers';
 import { Language } from '@app/Settings/Language/Language';
 import { NotFound } from '@app/NotFound/NotFound';
 export interface IAppRoute {
@@ -361,16 +361,22 @@ const routes: AppRouteConfig[] = [
     title: 'Integrations | Settings | Red Hat Hybrid Cloud Console',
   },
   {
-    element: <Notifications />,
-    exact: true,
-    path: '/settings/notifications',
-    title: 'Notifications | Settings | Red Hat Hybrid Cloud Console',
-  },
-  {
     element: <AlertManagerSettings />,
     exact: true,
     path: '/settings/alert-manager',
     title: 'Alert Manager | Settings | Red Hat Hybrid Cloud Console',
+  },
+  {
+    element: <AlertManagerSettings />,
+    exact: true,
+    path: '/settings/alert-manager/events/:eventId',
+    title: 'Event details | Alert Manager | Settings',
+  },
+  {
+    element: <ThirdPartyNotifiers />,
+    exact: true,
+    path: '/settings/third-party-notifiers',
+    title: 'Third-party notifiers | Settings',
   },
   {
     element: <Navigate to="/settings/user-preferences/language" replace />,

@@ -1,0 +1,110 @@
+export type EventFamily = 'RHEL' | 'OpenShift' | 'Subscription' | 'Console';
+export type EventSeverity = 'Critical' | 'Important' | 'Moderate' | 'Low' | 'None';
+export interface CatalogEvent {
+  id: string;
+  family: EventFamily;
+  eventType: string;
+  service: string;
+  severity?: EventSeverity;
+}
+
+type EventRow = [string, string, EventSeverity?, string?];
+const rows: Record<EventFamily, EventRow[]> = {
+  RHEL: [
+    ['New recommendation', 'Advisor', 'Critical', 'event-7'],
+    ['Deactivated recommendation', 'Advisor', 'None', 'deactivated'],
+    ['Resolved recommendation', 'Advisor', 'None'],
+    ['Policy report failed to upload', 'Compliance', 'Important'],
+    ['System is non compliant to SCAP policy', 'Compliance', 'Critical'],
+    ['New advisory', 'Content', 'Important'],
+    ['Validation error', 'Inventory', 'None'],
+    ['New system registered', 'Inventory', 'None'],
+    ['System became stale', 'Inventory', 'None'],
+    ['System deleted', 'Inventory', 'None'],
+    ['Lifecycle report', 'Life Cycle', 'Important'],
+    ['Detected malware', 'Malware'],
+    ['New suggestion', 'Resource Optimization', 'None'],
+    ['Roadmap report', 'Roadmap', 'Important'],
+    ['New vulnerability with CVSS >= 7.0', 'Vulnerability', 'Important'],
+    ['New vulnerability', 'Vulnerability', 'Critical'],
+    ['System vulnerability', 'Vulnerability', 'Important'],
+    ['System vulnerability with CVSS >= 7.0', 'Vulnerability', 'Important'],
+    ['System vulnerability containing security rule', 'Vulnerability', 'Important'],
+    ['System vulnerability with critical severity', 'Vulnerability', 'Critical'],
+    ['System vulnerability with known exploit', 'Vulnerability', 'Critical'],
+    ['Vulnerability with known exploit identified', 'Vulnerability', 'Critical'],
+    ['New vulnerability containing security rule', 'Vulnerability', 'Important'],
+    ['New vulnerability with critical severity', 'Vulnerability', 'Critical'],
+  ],
+  OpenShift: [
+    ['New recommendation', 'Advisor', 'Critical'],
+    ['Cluster Configuration', 'Cluster Manager', undefined, 'event-2'],
+    ['Cluster Lifecycle', 'Cluster Manager', undefined, 'event-5'],
+    ['Cluster Security', 'Cluster Manager', undefined, 'cluster-security'],
+    ['Cluster Ownership', 'Cluster Manager', undefined, 'cluster-ownership'],
+    ['Cluster Scaling', 'Cluster Manager', undefined, 'event-1'],
+    ['Customer Support', 'Cluster Manager', undefined, 'customer-support'],
+    ['General Notification', 'Cluster Manager'],
+    ['Capacity Management', 'Cluster Manager', undefined, 'capacity'],
+    ['Cluster Access', 'Cluster Manager', undefined, 'event-3'],
+    ['Cluster Add-on', 'Cluster Manager', undefined, 'event-4'],
+    ['Cluster Networking', 'Cluster Manager', undefined, 'event-6'],
+    ['Cluster Subscription', 'Cluster Manager'],
+    ['Cluster Update', 'Cluster Manager'],
+    ['Missing OpenShift cost model', 'Cost Management', 'Important'],
+    ['Stale cost management data', 'Cost Management', 'Moderate'],
+    ['Assessment Shared', 'Migration Advisor', 'Important'],
+    ['Partnership Request', 'Migration Advisor', 'Important'],
+    ['Assessment Created', 'Migration Advisor', 'Important'],
+    ['Partnership Response', 'Migration Advisor', 'Important'],
+  ],
+  Subscription: [
+    ['Red Hat Data Grid', 'Application services', 'None'],
+    ['Red Hat build of Quarkus', 'Application services', 'None'],
+    ['Red Hat build of Keycloak', 'Application services', 'None'],
+    ['AMQ Broker', 'Application services', 'None'],
+    ['Red Hat JBoss Enterprise Application Server XP', 'Application services', 'None'],
+    ['Apache Jsvc', 'Application services', 'None'],
+    ['Red Hat build of OpenJDK', 'Application services', 'None'],
+    ['Red Hat build of Netty OpenSSL', 'Application services', 'None'],
+    ['Single Sign-On CD', 'Application services', 'None'],
+    ['AMQ clients', 'Application services', 'None'],
+    ['Red Hat build of Apache Camel', 'Application services', 'None'],
+    ['Red Hat build of Apicurio Registry', 'Application services', 'None'],
+    ['Red Hat JBoss Web Server', 'Application services', 'None'],
+    ['Red Hat JBoss Enterprise Application Platform', 'Application services', 'None'],
+    ['Subscription Bug Fixes', 'Errata', 'Important'],
+    ['Subscription Enhancements', 'Errata', 'Moderate'],
+    ['Subscription Security Updates', 'Errata', 'Critical'],
+    ['Subscription threshold exceeded', 'Subscriptions Usage', 'Important'],
+    ['Custom subscription threshold exceeded', 'Subscriptions Usage', 'Moderate'],
+  ],
+  Console: [
+    ['Integration availability status changed', 'Cloud integrations', 'Low'],
+    ['Weekly Digest', 'Notifications', 'Low'],
+    ['Scheduled report ready to download', 'Scheduler', 'Low'],
+    ['Scheduled report generation failed', 'Scheduler', 'Moderate'],
+    ['Scheduled report generation failed - paused', 'Scheduler', 'Moderate'],
+    ['Custom role deleted', 'User Access', 'None'],
+    ['Custom role updated', 'User Access', 'None'],
+    ['Custom role created', 'User Access', 'None', 'custom-role'],
+    ['Red Hat role removed from default access group', 'User Access', 'Moderate'],
+    ['Group deleted', 'User Access', 'None'],
+    ['Group updated', 'User Access', 'None'],
+    ['New TAM access request created', 'User Access', 'Moderate'],
+    ['Default access group has changed to custom default access', 'User Access', 'Moderate'],
+    ['Access requested', 'User Access', 'Moderate'],
+    ['New Red Hat role added to default access group', 'User Access', 'Important'],
+    ['Group created', 'User Access', 'None', 'event-21'],
+    ['New Red Hat role available', 'User Access', 'Low'],
+    ['Red Hat role not in default access group updated', 'User Access', 'Moderate'],
+    ['Custom default access group updated', 'User Access', 'Moderate'],
+    ['Red Hat role in default access group updated', 'User Access', 'Important'],
+  ],
+};
+
+export const eventFamilies: EventFamily[] = ['RHEL', 'OpenShift', 'Subscription', 'Console'];
+export const catalogEvents: CatalogEvent[] = eventFamilies.flatMap((family) => rows[family].map(([eventType, service, severity, existingId]) => ({
+  id: existingId || `${family.toLowerCase()}-${eventType.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+  family, eventType, service, severity,
+})));
