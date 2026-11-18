@@ -1,0 +1,3 @@
+[submodule "ai-governance-gps"]
+	path = ai-governance-gps
+	url = https://github.com/yichen1yu/AI-governance.git
